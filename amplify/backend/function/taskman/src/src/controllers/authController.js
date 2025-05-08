@@ -13,8 +13,9 @@ exports.register = async (req, res) => {
         const newUser = new User({ name, email, password });
         await newUser.save();
 
-        res.status(201).json(ResponseFormatter.format({ msg: 'User registered successfully' }));
+        res.status(201).json(ResponseFormatter.format({ msg: 'User registered successfully', data: newUser }));
     } catch (error) {
+        console.log("🚀 ~ exports.register= ~ error:", error)
         res.status(500).json(ResponseFormatter.format({ msg: 'Server error', success: false }));
     }
 };
@@ -29,9 +30,10 @@ exports.login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json(ResponseFormatter.format({ msg: 'Invalid credentials', success: false }));
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, "lalala_hssnan", { expiresIn: '1h' });
         res.json(ResponseFormatter.format({ data: { token }, msg: 'Login successful' }));
     } catch (error) {
+        console.log("🚀 ~ exports.login= ~ error:", error)
         res.status(500).json(ResponseFormatter.format({ msg: 'Server error', success: false }));
     }
 };

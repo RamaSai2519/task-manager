@@ -11,6 +11,20 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
+// Middleware to log requests and responses globally
+app.use((req, res, next) => {
+  console.log(`Incoming Request: ${req.method} ${req.url}`);
+  console.log('Request Body:', req.body);
+
+  const originalSend = res.send;
+  res.send = function (body) {
+    console.log('Response Body:', body);
+    originalSend.call(this, body);
+  };
+
+  next();
+});
+
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://rama:7MR9oLpef122UCdy@cluster0.fquqway.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
