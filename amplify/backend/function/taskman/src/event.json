@@ -4,5 +4,5 @@
   "headers": {
     "Content-Type": "application/json"
   },
-  "body": "{\"email\":\"rchandik@gitam.in\",\"password\":\"test@123\"}"
+  "body": "{\"email\":\"rchandik@gitam.in\",\"password\":\"Test@123\"}"
 }
