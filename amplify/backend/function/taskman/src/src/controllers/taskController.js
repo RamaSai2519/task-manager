@@ -76,6 +76,17 @@ exports.getTasks = async (req, res) => {
     }
 };
 
+exports.getTaskById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const task = await Task.findById(id).populate('createdBy assignedTo', 'name email');
+        if (!task) return res.status(404).json(ResponseFormatter.format({ msg: 'Task not found', success: false }));
+        res.json(ResponseFormatter.format({ data: task }));
+    } catch (error) {
+        res.status(500).json(ResponseFormatter.format({ msg: 'Server error', success: false }));
+    }
+};
+
 // Update a task
 exports.updateTask = async (req, res) => {
     const { id } = req.params;
@@ -96,37 +107,6 @@ exports.deleteTask = async (req, res) => {
         const deletedTask = await Task.findByIdAndDelete(id);
         if (!deletedTask) return res.status(404).json(ResponseFormatter.format({ msg: 'Task not found', success: false }));
         res.json(ResponseFormatter.format({ msg: 'Task deleted successfully' }));
-    } catch (error) {
-        res.status(500).json(ResponseFormatter.format({ msg: 'Server error', success: false }));
-    }
-};
-
-// Fetch dashboard data
-exports.getDashboardData = async (req, res) => {
-    try {
-        const userId = req.user.id;
-
-        // Tasks assigned to the user
-        const assignedTasks = await Task.find({ assignedTo: userId }).sort({ dueDate: 1 });
-
-        // Tasks created by the user
-        const createdTasks = await Task.find({ createdBy: userId }).sort({ dueDate: 1 });
-
-        // Overdue tasks
-        const currentDate = new Date();
-        const overdueTasks = await Task.find({
-            assignedTo: userId,
-            dueDate: { $lt: currentDate },
-            status: { $ne: 'Completed' },
-        }).sort({ dueDate: 1 });
-
-        res.json(ResponseFormatter.format({
-            data: {
-                assignedTasks,
-                createdTasks,
-                overdueTasks,
-            },
-        }));
     } catch (error) {
         res.status(500).json(ResponseFormatter.format({ msg: 'Server error', success: false }));
     }
