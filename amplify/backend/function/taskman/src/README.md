@@ -3,12 +3,24 @@
 This is a Task Management System API built with Node.js, Express, and MongoDB.
 
 ## Table of Contents
-- [Routes](#routes)
-  - [Auth Routes](#auth-routes)
-  - [Task Routes](#task-routes)
-  - [Notification Routes](#notification-routes)
-- [Setup](#setup)
-- [Testing](#testing)
+- [Task Manager API](#task-manager-api)
+  - [Table of Contents](#table-of-contents)
+  - [Routes](#routes)
+    - [Auth Routes](#auth-routes)
+      - [Register a User](#register-a-user)
+      - [Login a User](#login-a-user)
+    - [Task Routes](#task-routes)
+      - [Create a Task](#create-a-task)
+      - [Get All Tasks](#get-all-tasks)
+      - [Update a Task](#update-a-task)
+      - [Delete a Task](#delete-a-task)
+      - [Get Dashboard Data](#get-dashboard-data)
+    - [Notification Routes](#notification-routes)
+      - [Get Notifications](#get-notifications)
+    - [User Routes](#user-routes)
+      - [Get Users](#get-users)
+  - [Setup](#setup)
+  - [Testing](#testing)
 
 ## Routes
 
@@ -161,6 +173,24 @@ This is a Task Management System API built with Node.js, Express, and MongoDB.
     ],
     "success": true
   }
+  ```
+
+### User Routes
+
+#### Get Users
+- **URL**: `/api/users`
+- **Method**: `GET`
+- **Query Parameters** (optional):
+  - `search`: Search by name or email (case-insensitive)
+- **Response**:
+  ```json
+  [
+    {
+      "_id": "string",
+      "name": "string",
+      "email": "string"
+    }
+  ]
   ```
 
 ## Setup

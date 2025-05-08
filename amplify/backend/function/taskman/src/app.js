@@ -40,6 +40,9 @@ app.use((req, res, next) => {
 
 // Middleware to check for Bearer token and decode user ID
 app.use((req, res, next) => {
+  if (req.url.startsWith('/api/auth')) {
+    return next();
+  }
   const authHeader = req.headers.authorization;
   if (authHeader && authHeader.startsWith('Bearer ')) {
     const token = authHeader.split(' ')[1];
@@ -73,6 +76,10 @@ app.use('/api/tasks', taskRoutes);
 
 const notificationRoutes = require('./src/routes/notificationRoutes');
 app.use('/api/notifications', notificationRoutes);
+
+// Added the new userRoutes to the app
+const userRoutes = require('./src/routes/userRoutes');
+app.use('/api/users', userRoutes);
 
 // Sample route
 app.get('/', (req, res) => {
