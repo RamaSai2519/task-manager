@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/api/{action}": {
+      "name": "/api/{action}",
+      "lambdaFunction": "taskman",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,11 +1,8 @@
 {
   "httpMethod": "POST",
-  "path": "/item",
-  "queryStringParameters": {
-    "limit": "10"
-  },
+  "path": "/api/auth/login",
   "headers": {
     "Content-Type": "application/json"
   },
-  "body": "{\"msg\":\"Hello from the event.json body\"}"
+  "body": "{\"email\":\"rchandik@gitam.in\",\"password\":\"test@123\"}"
 }
