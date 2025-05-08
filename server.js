@@ -23,6 +23,9 @@ mongoose.connect(process.env.MONGO_URI, {
 const authRoutes = require('./src/routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
+const taskRoutes = require('./src/routes/taskRoutes');
+app.use('/api/tasks', taskRoutes);
+
 // Sample route
 app.get('/', (req, res) => {
     res.send('Task Management System API');
