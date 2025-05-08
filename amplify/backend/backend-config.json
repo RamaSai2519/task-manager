@@ -1,0 +1,9 @@
+{
+  "function": {
+    "taskman": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  }
+}

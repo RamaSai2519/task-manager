@@ -12,12 +12,12 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+mongoose.connect('mongodb+srv://rama:7MR9oLpef122UCdy@cluster0.fquqway.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
-    .then(() => console.log('MongoDB connected'))
-    .catch((err) => console.error('MongoDB connection error:', err));
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
 const authRoutes = require('./src/routes/authRoutes');
@@ -31,10 +31,12 @@ app.use('/api/notifications', notificationRoutes);
 
 // Sample route
 app.get('/', (req, res) => {
-    res.send('Task Management System API');
+  res.send('Task Management System API');
 });
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
