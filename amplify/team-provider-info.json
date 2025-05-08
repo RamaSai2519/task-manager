@@ -33,7 +33,7 @@
       "function": {
         "taskman": {
           "deploymentBucketName": "amplify-taskmanback-main-9a117-deployment",
-          "s3Key": "amplify-builds/taskman-41316e61766c4c325a78-build.zip"
+          "s3Key": "amplify-builds/taskman-694178663052376f3342-build.zip"
         }
       },
       "api": {

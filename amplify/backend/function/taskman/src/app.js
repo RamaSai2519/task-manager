@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +35,24 @@ app.use((req, res, next) => {
     originalSend.call(this, body);
   };
 
+  next();
+});
+
+// Middleware to check for Bearer token and decode user ID
+app.use((req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = jwt.verify(token, "lalala_hssnan");
+      req.user = { id: decoded.id };
+    } catch (err) {
+      console.error('Invalid token:', err);
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  } else {
+    return res.status(401).json({ message: 'Authorization header missing or malformed' });
+  }
   next();
 });
 
