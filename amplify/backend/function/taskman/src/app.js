@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 // Load environment variables
 dotenv.config();
@@ -10,6 +11,17 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+app.use(cors());
+
+// Middleware to handle OPTIONS requests globally
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    console.log('Handling OPTIONS request');
+    res.status(200).send();
+  } else {
+    next();
+  }
+});
 
 // Middleware to log requests and responses globally
 app.use((req, res, next) => {
