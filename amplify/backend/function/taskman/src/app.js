@@ -89,7 +89,6 @@ app.get('/', (req, res) => {
   res.send('Task Management System API');
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
