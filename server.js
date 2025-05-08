@@ -26,6 +26,9 @@ app.use('/api/auth', authRoutes);
 const taskRoutes = require('./src/routes/taskRoutes');
 app.use('/api/tasks', taskRoutes);
 
+const notificationRoutes = require('./src/routes/notificationRoutes');
+app.use('/api/notifications', notificationRoutes);
+
 // Sample route
 app.get('/', (req, res) => {
     res.send('Task Management System API');
