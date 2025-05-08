@@ -21,5 +21,23 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "parameters": {
+    "AMPLIFY_function_taskman_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "taskman"
+        }
+      ]
+    },
+    "AMPLIFY_function_taskman_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "taskman"
+        }
+      ]
+    }
   }
 }
